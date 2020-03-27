@@ -42,24 +42,6 @@ namespace React.Sample.Webpack.CoreMvc
             }
             return result;
         }
-        public string GetUser(string token)
-        {
-            string result = string.Empty;
-            MSGraphUser user = null;
-            var url = $"https://graph.microsoft.com/v1.0/me/";
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-                var res = httpClient.GetAsync(url).Result;
-                string resultJson = res.Content.ReadAsStringAsync().Result;
-                if (res.IsSuccessStatusCode)
-                {
-                    user = JsonConvert.DeserializeObject<MSGraphUser>(resultJson);
-                    result = user.displayName;
-                }
-            }
-            return result;
-        }
     }
     public class MSGraphAuthTokens
     {
@@ -69,20 +51,5 @@ namespace React.Sample.Webpack.CoreMvc
         public string scope { get; set; }
         public string refresh_token { get; set; }
         public string id_token { get; set; }
-    }
-
-    public class MSGraphUser
-    {
-        public string displayName { get; set; }
-        public string surname { get; set; }
-        public string givenName { get; set; }
-        public string id { get; set; }
-        public string userPrincipalName { get; set; }
-        public List<string> businessPhones { get; set; }
-        public string jobTitle { get; set; }
-        public string mail { get; set; }
-        public string mobilePhone { get; set; }
-        public string officeLocation { get; set; }
-        public string preferredLanguage { get; set; }
     }
 }

@@ -56,12 +56,6 @@ namespace React.Sample.Webpack.CoreMvc.Controllers
 				token = new AccessGraph().GetToken(clientId, secret, redirectUri, "", code, tenant, "user.read");
 				if (!string.IsNullOrEmpty(token)) signIn = true;
 			}
-			if (signIn) accountName = new AccessGraph().GetUser(token);
-			if (!string.IsNullOrEmpty(accountName)) 
-			{
-				accountName = string.Join("", Regex.Matches(accountName, @"[a-z | A-Z]*")).Trim();
-			}
-			ViewBag.AccountName = accountName;
 			ViewBag.IsSignin = signIn;
 			ViewBag.Menu = new List<string>();
 			ViewBag.Message = string.Empty;
